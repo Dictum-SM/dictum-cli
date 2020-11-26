@@ -23,7 +23,7 @@ function init {
   CDIR=`pwd`
   cd $TMPDIR
   chmod +x installer
-  ./installer
+  ./init.sh
 
   cd $CDIR
   rm -rf $TMPDIR
