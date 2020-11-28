@@ -103,7 +103,6 @@ else
   then
     echo "$1 is not a supported option."
     echo "Use "dictum-cli help" for more info"
-    echo "$FUNCTIONS"
     exit 1
   fi
 fi
