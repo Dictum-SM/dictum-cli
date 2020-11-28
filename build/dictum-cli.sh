@@ -107,9 +107,10 @@ function help {
 }
 
 function version {
-    echo ""
-    echo "Super Duper Prototype Prerelease Proof of Concept."
-    echo ""
+  echo ""
+  echo "Super Duper Prototype Prerelease Proof of Concept."
+  echo ""
+  exit 0
 }
 
 FUNCTIONS=$(typeset -f | awk '/ \(\) $/ && !/^main / {print $1}')
