@@ -2,3 +2,19 @@ Dictum State Machine CLI (dictum-cli)
 
 Dictum-cli is a convenience utility for users to manage DSM workspaces.
 
+- Available options -
+
+define: Open the state file for editing.
+
+init: Initialize a new DSM workspace
+
+help: This message
+
+prep-delete: Prepare a DSM managed environment for deletion.
+
+reset: Mark a DSM workspace for normal operation
+
+run: Run DSM on the current workspace
+
+version: Display the installed version of dictum-cli 
+
