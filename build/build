@@ -17,5 +17,7 @@ else
     exit 1
 fi
 
+rm -f resources.tar.gz
+
 echo "dictum-cli created"
 exit 0
