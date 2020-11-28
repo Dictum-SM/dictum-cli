@@ -47,6 +47,18 @@ function run {
   CDIR=$PWD
   cd $TMPDIR
   chmod +x run.sh
+
+  if ! command -v kubectl &> /dev/null
+  then
+    echo "Missing dependency. Install kubectl"
+    exit 1
+  fi
+  if ! command -v yq &> /dev/null
+  then
+    echo "Missing dependency. Instlall yq."
+    exit 1
+  fi
+
   ./run.sh
 
   cd $CDIR
