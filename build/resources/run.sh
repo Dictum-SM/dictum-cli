@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Copy over the state-machine
-cp -R ${TMPDIR}/state ${DIR}/.state/
+cp -R ${TMPDIR}/state ${WORKSPACE}/.state/
 
 # Run state machine
-chmod +x ${DIR}/.state/state/state.sh
-${DIR}/.state/state/state.sh
+chmod +x ${WORKSPACE}/.state/state/state.sh
+${WORKSPACE}/.state/state/state.sh
 
 # Delete State machine after run
 
-rm -Rf ${DIR}/.state/state
+rm -Rf ${WORKSPACE}/.state/state
