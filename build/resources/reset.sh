@@ -12,9 +12,15 @@ else
     echo "No state file found."
     echo "There is a problem with this workspace."
     exit 1
+  else
+    if [[ ! -f ${DIR}/.state/.state.del ]]
+    then
+      echo "No teardown prep detected. No changes made."
+      exit 1
+    fi
   fi
 fi
 
-# Prep the workspace for deletions
-mv ${DIR}/.state/.state ${DIR}/.state/.state.del
-cp -n ${TMPDIR}/state-delete.yaml ${DIR}/.state/.state
+# Reset from deletion workspace
+mv ${DIR}/.state/.state.del ${DIR}/.state/.state
+

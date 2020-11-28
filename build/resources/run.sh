@@ -1,6 +1,12 @@
 #!/bin/bash
 
-# Link from tempdir to .state dir
-ln -s ${TEMPDIR}/state ${DIR}/.state/
+# Copy over the state-machine
+cp -R ${TMPDIR}/state ${DIR}/.state/
 
-# I dont think that DSM will discover the initialized workspace like this... 
+# Run state machine
+chmod +x ${DIR}/.state/state/state.sh
+./${DIR}/.state/state/state.sh
+
+# Delete State machine after run
+
+rm -Rf ${DIR}/.state/state

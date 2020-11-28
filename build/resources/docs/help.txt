@@ -1,0 +1,4 @@
+Dictum State Machine CLI (dictum-cli)
+
+Dictum-cli is a convenience utility for users to manage DSM workspaces.
+

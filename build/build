@@ -1,21 +1,21 @@
 #!/bin/bash
-cd payload
-tar cf ../payload.tar ./*
+cd resources
+tar cf ../resources.tar ./*
 cd ..
 
-if [ -e "payload.tar" ]; then
-    gzip payload.tar
+if [ -e "resources.tar" ]; then
+    gzip resources.tar
 
-    if [ -e "payload.tar.gz" ]; then
-        cat decompress payload.tar.gz > selfextract.bsx
+    if [ -e "resources.tar.gz" ]; then
+        cat dictum-cli.sh resources.tar.gz > dictum-cli
     else
-        echo "payload.tar.gz does not exist"
+        echo "resources.tar.gz does not exist"
         exit 1
     fi
 else
-    echo "payload.tar does not exist"
+    echo "resources.tar does not exist"
     exit 1
 fi
 
-echo "selfextract.bsx created"
+echo "dictum-cli created"
 exit 0
