@@ -11,4 +11,8 @@ init: Initialize Dictum workspace by performing the follwing:
 
 define: open the state file in vi
           
+prep-delete: Marks the DSM workspace to delete the environment on next DSM run
+
+run: Run DSM on an initialized workspace
+
 help: open a help dialog to assist with using Dictum-cli and Dictum-SM

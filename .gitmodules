@@ -1,0 +1,3 @@
+[submodule "build/resources/state"]
+	path = build/resources/state
+	url = git@github.com:Dictum-SM/state.git

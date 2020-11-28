@@ -8,10 +8,11 @@ while [ -h "$SOURCE" ]; do
 done
 export DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
+# Uses current directory as workspace root
 function init {
 
   echo ""
-  echo "Self Extracting Installer"
+  echo "Initializing DSM Workspace"
   echo ""
 
   export TMPDIR=`mktemp -d ./selfextract.XXXXXX`
@@ -22,7 +23,7 @@ function init {
 
   CDIR=`pwd`
   cd $TMPDIR
-  chmod +x installer
+  chmod +x init.sh
   ./init.sh
 
   cd $CDIR
@@ -31,7 +32,7 @@ function init {
   exit 0
 }
 
-function extract {
+function define {
   echo ""
   echo "Extracting..."
   echo ""
@@ -45,7 +46,64 @@ function extract {
   exit 0
 }
 
-if [ $# -eq 0 ]; then
+function run {
+  echo ""
+  echo "Extracting..."
+  echo ""
+
+  mkdir ./kubeadm-omnibus
+
+  ARCHIVE=`awk '/^__ARCHIVE_BELOW__/ {print NR + 1; exit 0; }' $0`
+
+  tail -n+$ARCHIVE $0 | tar xzv -C kubeadm-omnibus
+
+  exit 0
+}
+
+function prep-delete {
+  echo ""
+  echo "Extracting..."
+  echo ""
+
+  mkdir ./kubeadm-omnibus
+
+  ARCHIVE=`awk '/^__ARCHIVE_BELOW__/ {print NR + 1; exit 0; }' $0`
+
+  tail -n+$ARCHIVE $0 | tar xzv -C kubeadm-omnibus
+
+  exit 0
+}
+
+function reset {
+  echo ""
+  echo "Extracting..."
+  echo ""
+
+  mkdir ./kubeadm-omnibus
+
+  ARCHIVE=`awk '/^__ARCHIVE_BELOW__/ {print NR + 1; exit 0; }' $0`
+
+  tail -n+$ARCHIVE $0 | tar xzv -C kubeadm-omnibus
+
+  exit 0
+}
+
+function help {
+  echo ""
+  echo "Extracting..."
+  echo ""
+
+  mkdir ./kubeadm-omnibus
+
+  ARCHIVE=`awk '/^__ARCHIVE_BELOW__/ {print NR + 1; exit 0; }' $0`
+
+  tail -n+$ARCHIVE $0 | tar xzv -C kubeadm-omnibus
+
+  exit 0
+}
+
+if [ $# -eq 0 ]
+then
     echo "No arguments provided"
     exit 1
 fi
