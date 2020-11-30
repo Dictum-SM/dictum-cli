@@ -4,32 +4,12 @@ on:
     # Sequence of patterns matched against refs/tags
     tags:
     - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
-    paths-ignore:
-    - 'docs/**'
-    - '**.md'
-  pull_request:
-    # Sequence of patterns matched against refs/tags
-    tags:
-    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
-    paths-ignore:
-    - 'docs/**'
-    - '**.md'
-  schedule:
-    - cron: '0 4 * * *'
 
 jobs:
   build:
     name: Upload Release Asset
     runs-on: ubuntu-20.04
     steps:
-
-      - name: Login Docker.io
-        uses: docker/login-action@v1
-        with:
-          logout: true
-          registry: docker.io
-          username: ${{ secrets.ROBOT_USER_DOCKERHUB }}
-          password: ${{ secrets.ROBOT_TOKEN_DOCKERHUB }}
 
       - name: Git Checkout
         uses: actions/checkout@v2
@@ -67,29 +47,3 @@ jobs:
           asset_path: ./dictum-cli
           asset_name: dictum-cli
           asset_content_type: application/bin
-
-      - name: Setup Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Rake Variables
-        run: |
-          set -x ; \
-          echo "varrundate=$(date +%y%m%d%I%M%S)" >> ${GITHUB_ENV};\
-          echo "kubectl_version=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)" >> ${GITHUB_ENV};\
-          echo "dictum_version=$(curl -sL https://api.github.com/repos/Dictum-SM/dictum-cli/releases/latest | jq -r '.tag_name' | sed 's/v//g')" >> ${GITHUB_ENV};\
-          echo;  
-
-      - name: Build Image 
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: Dockerfile
-          platforms: linux/amd64
-          push: true
-          tags: |
-            docker.io/${{ secrets.GIT_PROJECT }}/${{ github.workflow }}
-            docker.io/${{ secrets.GIT_PROJECT }}/${{ github.workflow }}:${{ env.dictum_version }}
-            docker.io/${{ secrets.GIT_PROJECT }}/${{ github.workflow }}:${{ env.dictum_version }}-${{ env.varrundate }}-${{ github.sha }}
-          build-args: |
-            dictum_version=${{ env.dictum_version }}
-            kubectl_version=${{ env.kubectl_version }}
