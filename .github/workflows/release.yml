@@ -75,6 +75,7 @@ jobs:
         run: |
           set -x ; \
           echo "varrundate=$(date +%y%m%d%I%M%S)" >> ${GITHUB_ENV};\
+          echo "kubectl_version=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)" >> ${GITHUB_ENV};\
           echo "dictum_version=$(curl -sL https://api.github.com/repos/Dictum-SM/dictum-cli/releases/latest | jq -r '.tag_name' | sed 's/v//g')" >> ${GITHUB_ENV};\
           echo;  
 
@@ -91,3 +92,4 @@ jobs:
             docker.io/${{ secrets.GIT_PROJECT }}/${{ github.workflow }}:${{ env.dictum_version }}-${{ env.varrundate }}-${{ github.sha }}
           build-args: |
             dictum_version=${{ env.dictum_version }}
+            kubectl_version=${{ env.kubectl_version }}
